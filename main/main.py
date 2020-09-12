@@ -1,16 +1,16 @@
-# This is a sample Python script.
-
-# Press Shift+F10 to execute it or replace it with your code.
-# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
-
-
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press Ctrl+F8 to toggle the breakpoint.
-
-
-# Press the green button in the gutter to run the script.
-if __name__ == '__main__':
-    print_hi('PyCharm')
-
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+import json
+import requests
+headers = {"Authorization": "Bearer ### access token ###"}
+para = {
+    "name": "##yourfilepath####",
+}
+files = {
+    'data': ('metadata', json.dumps(para), 'application/json; charset=UTF-8'),
+    'file': open("./sample.png", "rb")
+}
+r = requests.post(
+    "https://www.googleapis.com/upload/drive/v3/files?uploadType=multipart",
+    headers=headers,
+    files=files
+)
+print(r.text)
